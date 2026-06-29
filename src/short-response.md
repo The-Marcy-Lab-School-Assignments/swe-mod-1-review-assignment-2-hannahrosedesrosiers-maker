@@ -26,14 +26,13 @@ Part B: How would you modify the code so that reassigning `playlist2.songCount` 
 
 ### Response 1
 
-Your response...
+It will log `15` because objects are reference types. `playlist2` is not a new object, it is pointing to the same object as `playlist1`, so changing `playlist2.songCount` also changes `playlist1.songCount`.
 
 **Corrected Code:**
 
 ```js
-// fix this!
 const playlist1 = { name: "My Favorites", songCount: 10 };
-const playlist2 = playlist1;
+const playlist2 = { ...playlist1 };
 playlist2.songCount = 15;
 console.log(playlist1.songCount);
 ```
@@ -60,7 +59,10 @@ For each task below, identify which array method (forEach, filter, map, find, or
 
 ### Response 2
 
-Your response...
+1. I would use `filter` to get students who scored above 85.
+2. I would use `find` to get the student named "Destiny".
+3. I would use `reduce` to calculate the average grade.
+4. I would use `map` to create the array of strings.
 
 ---
 
@@ -82,7 +84,20 @@ console.log(upperCaseLetters);
 
 ### Response 3
 
-Your response...
+The error happens because `capitalize()` is being called right away instead of being passed into `map`. Since no string is passed in, `str` is `undefined`, so `.toUpperCase()` does not work.
+
+To fix it, pass the function name without parentheses:
+
+```js
+const letters = ['a', 'b', 'c', 'd'];
+const capitalize = (str) => str.toUpperCase();
+
+const upperCaseLetters = letters.map(capitalize);
+
+console.log(upperCaseLetters);
+```
+
+To avoid this, remember that array methods like `map` need a callback function, not the result of calling the function.
 
 ---
 
@@ -111,4 +126,8 @@ const grandTotal = orders.reduce((sum, order) => {
 
 ### Response 4
 
-Your response...
+Part A: `grandTotal` will equal `135`.
+
+Part B: The `0` is the starting value for `sum`. It is important because it makes the total start at 0 before adding each order total.
+
+Part C: In the first iteration, `sum` is `0` and `order` is `{ id: 1, total: 45 }`. The code returns `45`, so that becomes the new value of `sum`.

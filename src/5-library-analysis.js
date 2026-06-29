@@ -8,22 +8,22 @@ const books = [
 ];
 
 // A: Use filter to get all available books and store them in a variable called `availableBooks`.
-const availableBooks =  books.filter(book => book.available);
+const availableBooks = books.filter(book => book.available);
 console.log(availableBooks);
 
 // B: Use map on the `availableBooks` array to create a new array called `availableTitles` containing just the titles of available books.
-const availableTitles =  availableBooks.map(book => book.title);
+const availableTitles = availableBooks.map(book => book.title);
 console.log(availableTitles);
 
 // C: Chain filter and map together in a single expression to get the titles of all books with more than 50 checkouts. Store this in a variable called `popularBookTitles`.
-const popularBookTitles  = books
-  .filter(book => book.checkouts >50 )
+const popularBookTitles = books
+  .filter(book => book.checkouts > 50)
   .map(book => book.title);
 console.log(popularBookTitles);
 
 // D: Use reduce to calculate the total number of checkouts across ALL books. Store this in a variable called `totalCheckouts`.
-const totalCheckouts = books.reduce((total, currentExpense) => {
-  return total + currentExpense
+const totalCheckouts = books.reduce((total, book) => {
+  return total + book.checkouts;
 }, 0);
 
 console.log(totalCheckouts);
@@ -31,4 +31,12 @@ console.log(totalCheckouts);
 
 // E: Use reduce to find the highest number of checkouts any single book has received. Store this in a variable called `mostCheckouts`.
 // Hint: Start with 0 and compare each book's checkouts to your accumulator. If the book's checkouts are higher, return that number; otherwise, return the current accumulator.
-const mostCheckouts = undefined;
+const mostCheckouts = books.reduce((highest, book) => {
+  if (book.checkouts > highest) {
+    return book.checkouts;
+  }
+
+  return highest;
+}, 0);
+
+console.log(mostCheckouts);
